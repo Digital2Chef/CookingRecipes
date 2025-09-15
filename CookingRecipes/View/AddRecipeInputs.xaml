@@ -1,0 +1,126 @@
+﻿<UserControl x:Class="CookingRecipes.View.AddRecipeInputs"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:CookingRecipes.View"
+             mc:Ignorable="d" 
+             d:DesignHeight="550" d:DesignWidth="800">
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+    <Grid HorizontalAlignment="Center" Background="GhostWhite">
+        <!--User controls for adding recipe inputs-->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+       
+            <!--Title-->
+        <TextBlock Text="Add New Recipe" FontSize="20" Foreground="Orange" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        
+        <!--Recipe name-->
+        <StackPanel Orientation="Horizontal" Grid.Row="1">
+            <Label Width="120" Content="Recipe name:" FontSize="17" Foreground="Orange"/>
+            <TextBox Text="{Binding Food, UpdateSourceTrigger=PropertyChanged}" Width="120" Height="30" VerticalContentAlignment="Center"/>
+        </StackPanel>
+        
+        <!--Recipe's description-->
+       
+        <StackPanel Orientation="Horizontal" Grid.Row="2">
+            <Label Width="120" Content="Description:" FontSize="17" Foreground="Orange"/>
+                <TextBox Text="{Binding Description, UpdateSourceTrigger=PropertyChanged}" AcceptsReturn="True" TextWrapping="Wrap" Width="120" Height="30" VerticalContentAlignment="Center"/>
+        </StackPanel>
+        
+        <!--Category-->
+
+            <StackPanel Orientation="Horizontal" Grid.Row="3">
+                <Label Width="120" Content="Category:" FontSize="17" Foreground="Orange"/>
+                <TextBox Text="{Binding Category, UpdateSourceTrigger=PropertyChanged}" AcceptsReturn="True" TextWrapping="Wrap" Width="120" Height="30" VerticalContentAlignment="Center"/>
+            </StackPanel>
+
+            <!--Ingridients number-->
+            <StackPanel Orientation="Horizontal" Grid.Row="4">
+                <Label Width="120" Content="Ingridients number:" FontSize="12" Foreground="Orange"/>
+                <TextBox Text="{Binding IngredientsNumber, UpdateSourceTrigger=PropertyChanged}" AcceptsReturn="True" TextWrapping="Wrap" Width="120" Height="30" VerticalContentAlignment="Center"/>
+             
+            </StackPanel>
+
+            <!--Ingridient 1-->
+
+            <StackPanel Orientation="Horizontal" Grid.Row="5">
+                <Label  Content="Ingredients:" Width="120" FontSize="20" Foreground="Orange"/>
+                <ItemsControl ItemsSource="{Binding Ingredients}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+
+                            <TextBox  Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" 
+                         AcceptsReturn="True" TextWrapping="Wrap" 
+                         Width="120" Height="30" Margin="0,2"
+                         VerticalContentAlignment="Center"/>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+
+                <Button Content="+" Command="{Binding DataContext.addMoreIngredientTextBoxes, RelativeSource={RelativeSource AncestorType=StackPanel}}"  
+            Width="30" Height="30" Background="Orange" Margin="0,5"/>
+                
+            </StackPanel>
+
+
+            <!--Instructions-->
+            <StackPanel Orientation="Horizontal" Grid.Row="6">
+                <Label Width="120" Content="Instructions:" FontSize="17" Foreground="Orange"/>
+            <TextBox Text="{Binding Instructions, UpdateSourceTrigger=PropertyChanged}" AcceptsReturn="True" TextWrapping="Wrap" Width="120" Height="30" VerticalContentAlignment="Center"/>
+          
+            </StackPanel>
+
+            <!--Cooking time-->
+          
+                <StackPanel Orientation="Horizontal" Grid.Row="7">
+            <Label Width="120" Content="Cooking time:" FontSize="14" Foreground="Orange"/>
+                <TextBox Text="{Binding CookingTime, UpdateSourceTrigger=PropertyChanged}" AcceptsReturn="True" TextWrapping="Wrap" Width="40" Height="20" VerticalContentAlignment="Center"/>
+            <Label Width="120" Content="minutes" FontSize="14" Foreground="Orange"/>
+        </StackPanel>
+        
+        <!--Difficulty-->
+        <StackPanel Orientation="Horizontal" Grid.Row="8">
+            <Label Width="120" Content="Difficulty:" FontSize="14" Foreground="Orange"/>
+            <ComboBox   Text="{Binding Difficulty}" Background="Orange" SelectedIndex="0" Width="100">
+                <ComboBox.Style>
+                    <Style TargetType="ComboBox">
+                        <Setter Property="Background" Value="Orange"/>
+                        <Setter Property="Foreground" Value="DarkBlue"/>
+                    </Style>
+                </ComboBox.Style>
+                <ComboBoxItem Content="Easy"/>
+                <ComboBoxItem Content="Medium"/>
+                <ComboBoxItem Content="Hard"/>
+            </ComboBox>
+        </StackPanel>
+
+        <Grid Width="250" Margin="10" HorizontalAlignment="Left" Grid.Row="9">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+
+            </Grid.ColumnDefinitions>
+            
+            <!--Save recipe btn-->
+            <Button Command ="{Binding submitRecipe}" Content="Save" Background="Green" Width="120" Height="35"/>
+            
+            <!--Cancel btn-->
+            <Button Command="{Binding cancel}" Content="Cancel" Background="Red" Width="120" Height="35" Grid.Column="1"/>
+        </Grid>
+   
+    </Grid>
+    </ScrollViewer>
+</UserControl>
